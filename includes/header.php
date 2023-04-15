@@ -1,5 +1,5 @@
-<?php include "admin/includes/db.php"; ?>
-<?php include "admin/includes/functions.php"; ?>
+<?php include "db.php"; ?>
+<?php include "functions.php"; ?>
 <?php ob_start(); ?>
 <?php session_start(); ?>
 
@@ -14,12 +14,12 @@
 
     <title>Office Management System</title>
     <!-- Bootstrap Core CSS -->
-    <link href="admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="admin/css/style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
     <!-- Navigation -->
-    <?php include "includes/navigation.php"; ?>
+    <?php include "navigation.php"; ?>
     <!-- Page Content -->
     <div class="container">

@@ -1,5 +1,5 @@
-<?php include "../admin/includes/db.php"; ?>
-<?php include "../admin/includes/functions.php"; ?>
+<?php include "db.php"; ?>
+<?php include "functions.php"; ?>
 <?php session_start(); ?>
 
 <?php
