@@ -55,8 +55,11 @@ function setSupervisor($user_id, $supervisor_id) {
         $query .= "WHERE id = {$user_id}";
         if (!mysqli_query($connection, $query)) {
             die("UPDATE ERROR " . mysqli_error($connection));
+            return false;
         }
+        return true;
     }
+    return false;
 }
 
 function updateUser($id, $firstname, $lastname, $username, $image, $role, $email, $password) {

@@ -19,14 +19,14 @@
         <h4>My Manager</h4>
         <form action="includes/action/user_manager.php" method="post">
             <div class="form-group">
-                <label class="form-label">Choose your manager</label>
-                <select class="form-control" name="supervisor">
+                <label class="form-label" for="supervisor">Choose your manager</label>
+                <select class="form-control" name="supervisor" id="supervisor">
 <?php
                 if ($result = getAllUsers()) {
                     while ($row = mysqli_fetch_assoc($result)) {
-                        if ($row["id"] != $_SESSION["id"]) {
+                        if ($row["id"] != $_SESSION["id"] && $_SESSION["manager"] != $row["id"]) {
 ?>
-                            <option value="<?php echo $row["id"]; ?>">
+                            <option value="<?php echo $row["id"]; ?>" >
                                 <?php echo $row["first_name"]." ".$row["last_name"]; ?>
                             </option>
 <?php
