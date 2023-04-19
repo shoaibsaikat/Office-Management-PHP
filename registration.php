@@ -1,18 +1,22 @@
-<?php include "includes/header.php"; ?>
+<?php include "includes/ui/header.php"; ?>
 
 <?php
     $msg = "";
     if (isset($_POST["submit"])) {
-        if ($_POST["username"] != "" && $_POST["email"] != "" && $_POST["password"] != "" && $_POST["firstname"] != "") {
-            $u_name = mysqli_real_escape_string($connection, $_POST["username"]);
-            $u_first_name = mysqli_real_escape_string($connection, $_POST["firstname"]);
-            $u_last_name = mysqli_real_escape_string($connection, $_POST["lastname"]);
-            $u_email = mysqli_real_escape_string($connection, $_POST["email"]);
+        if ($_POST["username"] != "" && $_POST["email"] != "" && $_POST["password"] != "" && $_POST["password2"] != "" && $_POST["firstname"] != "") {
             $u_pass = mysqli_real_escape_string($connection, $_POST["password"]);
-            $u_pass = password_hash($u_pass, PASSWORD_BCRYPT, ["cost" => 12]);
-
-            registerUser($u_name, $u_first_name, $u_last_name, $u_email, $u_pass);
-            header("Location: index.php");
+            $u_pass2 = mysqli_real_escape_string($connection, $_POST["password2"]);
+            if (strcmp($u_pass,$u_pass2) != 0) {
+                $msg = "Passwords doesn't match!";
+            } else {
+                $u_name = mysqli_real_escape_string($connection, $_POST["username"]);
+                $u_first_name = mysqli_real_escape_string($connection, $_POST["firstname"]);
+                $u_last_name = mysqli_real_escape_string($connection, $_POST["lastname"]);
+                $u_email = mysqli_real_escape_string($connection, $_POST["email"]);
+                $u_pass = password_hash($u_pass, PASSWORD_BCRYPT, ["cost" => 12]);
+                registerUser($u_name, $u_first_name, $u_last_name, $u_email, $u_pass);
+                header("Location: index.php");
+            }
         } else {
             $msg = "Fields can't be empty!";
         }
@@ -49,6 +53,10 @@
                             <label for="password" class="sr-only">Password</label>
                             <input type="password" name="password" id="key" class="form-control" placeholder="Password">
                         </div>
+                        <div class="form-group">
+                            <label for="password2" class="sr-only">Enter password again</label>
+                            <input type="password2" name="password2" id="key" class="form-control" placeholder="Password2">
+                        </div>
 
                         <input type="submit" name="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Register">
                     </form>
@@ -60,4 +68,4 @@
 
 <hr>
 
-<?php include "includes/footer.php";?>
+<?php include "includes/ui/footer.php";?>

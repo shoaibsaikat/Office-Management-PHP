@@ -2,7 +2,7 @@
 <?php if (!isset($_SESSION["id"])) { ?>
     <div>
         <h4>Login</h4>
-        <form action="includes/login.php" method="post">
+        <form action="includes/ui/login.php" method="post">
             <div class="form-group">
                 <input type="text" name="username" class="form-control" placeholder="Enter Username">
             </div>

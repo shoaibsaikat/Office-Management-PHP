@@ -1,5 +1,5 @@
-<?php include "db.php"; ?>
-<?php include "functions.php"; ?>
+<?php include "../db/db.php"; ?>
+<?php include "../db/functions.php"; ?>
 <?php session_start(); ?>
 
 <?php
@@ -21,6 +21,6 @@
                 }
             }
         }
-        header("Location: ../index.php");
+        header("Location: ../../index.php");
     }
 ?>
