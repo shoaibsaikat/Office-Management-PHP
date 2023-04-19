@@ -14,10 +14,9 @@
                     $_SESSION["username"] = $row["username"];
                     $_SESSION["firstname"] = $row["first_name"];
                     $_SESSION["lastname"] = $row["last_name"];
-                    echo '<script>console.log("logged in");</script>';
+                    $_SESSION["manager"] = $row["supervisor_id"];
+                    // echo '<script>console.log("logged in");</script>';
                     break;
-                } else {
-                    echo '<script>console.log("login failed");</script>';
                 }
             }
         }

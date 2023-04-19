@@ -1,5 +1,4 @@
 <?php
-
 // create
 function registerUser($username, $firstname, $lastname, $email, $password) {
     global $connection;
@@ -10,27 +9,10 @@ function registerUser($username, $firstname, $lastname, $email, $password) {
     }
 }
 
-function addUser($firstname, $lastname, $username, $image, $role, $email, $password) {
-    global $connection;
-    $query = "INSERT INTO users (user_firstname, user_lastname, user_username, user_image, user_role, user_email, user_password) ";
-    $query .= "VALUES ('{$firstname}', '{$lastname}', '{$username}', '{$image}', '{$role}', '{$email}', '{$password}')";
-    if (!mysqli_query($connection, $query)) {
-        die("INSERT ERROR " . mysqli_error($connection));
-    }
-}
-
 // read
 function getAllUsers() {
     global $connection;
-    $query = "SELECT * FROM users";
-    if ($result = mysqli_query($connection, $query))
-        return $result;
-    return null;
-}
-
-function getAllSubscribers() {
-    global $connection;
-    $query = "SELECT * FROM users WHERE user_role = 'subscriber'";
+    $query = "SELECT * FROM user";
     if ($result = mysqli_query($connection, $query))
         return $result;
     return null;
@@ -38,7 +20,7 @@ function getAllSubscribers() {
 
 function getUserById($id) {
     global $connection;
-    $query = "SELECT * FROM users WHERE user_id = {$id}";
+    $query = "SELECT * FROM user WHERE user_id = {$id}";
     if ($result = mysqli_query($connection, $query))
         return $result;
     return null;
@@ -54,7 +36,7 @@ function getUserByUsername($name) {
 
 function isDuplicateUsername($name) {
     global $connection;
-    $query = "SELECT * FROM users WHERE user_username = '{$name}'";
+    $query = "SELECT * FROM user WHERE user_username = '{$name}'";
 
     if ($result = mysqli_query($connection, $query)) {
         if (mysqli_num_rows($result) == 0)
@@ -65,44 +47,21 @@ function isDuplicateUsername($name) {
 }
 
 // update
-function makeAdminUser($id) {
-    global $connection;
-    $query = "UPDATE users SET ";
-    $query .= "user_role = 'admin' ";
-    $query .= "WHERE user_id = {$id}";
-    if (!mysqli_query($connection, $query)) {
-        die("UPDATE ERROR " . mysqli_error($connection));
-    }
-}
-
-function makeSubscriberUser($id) {
-    global $connection;
-    $query = "UPDATE users SET ";
-    $query .= "user_role = 'subscriber' ";
-    $query .= "WHERE user_id = {$id}";
-    if (!mysqli_query($connection, $query)) {
-        die("UPDATE ERROR " . mysqli_error($connection));
-    }
-}
-
-function updateUserWithoutPassword($id, $firstname, $lastname, $username, $image, $role, $email) {
-    global $connection;
-    $query = "UPDATE users SET ";
-    $query .= "user_firstname = '{$firstname}', ";
-    $query .= "user_lastname = '{$lastname}', ";
-    $query .= "user_username = '{$username}', ";
-    $query .= "user_image = '{$image}', ";
-    $query .= "user_role = '{$role}', ";
-    $query .= "user_email = '{$email}' ";
-    $query .= "WHERE user_id = {$id}";
-    if (!mysqli_query($connection, $query)) {
-        die("UPDATE ERROR " . mysqli_error($connection));
+function setSupervisor($user_id, $supervisor_id) {
+    if ($user_id != $supervisor_id) {
+        global $connection;
+        $query = "UPDATE user SET ";
+        $query .= "supervisor_id = '{$supervisor_id}' ";
+        $query .= "WHERE id = {$user_id}";
+        if (!mysqli_query($connection, $query)) {
+            die("UPDATE ERROR " . mysqli_error($connection));
+        }
     }
 }
 
 function updateUser($id, $firstname, $lastname, $username, $image, $role, $email, $password) {
     global $connection;
-    $query = "UPDATE users SET ";
+    $query = "UPDATE user SET ";
     $query .= "user_firstname = '{$firstname}', ";
     $query .= "user_lastname = '{$lastname}', ";
     $query .= "user_username = '{$username}', ";
@@ -113,15 +72,6 @@ function updateUser($id, $firstname, $lastname, $username, $image, $role, $email
     $query .= "WHERE user_id = {$id}";
     if (!mysqli_query($connection, $query)) {
         die("UPDATE ERROR " . mysqli_error($connection));
-    }
-}
-
-// delete
-function deleteUser($id) {
-    global $connection;
-    $query = "DELETE from users WHERE user_id = {$id}";
-    if (!mysqli_query($connection, $query)) {
-        die("DELETE ERROR " . mysqli_error($connection));
     }
 }
 

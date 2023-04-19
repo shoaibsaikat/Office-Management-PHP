@@ -16,7 +16,7 @@
 <?php if (!isset($_SESSION["id"])) { ?>
                 <li><a href='registration.php'>Registration</a></li>
 <?php } else { ?>
-                <li><a href='includes/ui/logout.php'>Logout</a></li>
+                <li><a href='includes/action/user_logout.php'>Logout</a></li>
 <?php } ?>
             </ul>
         </div>
