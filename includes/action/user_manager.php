@@ -3,11 +3,11 @@
 <?php session_start(); ?>
 
 <?php
-    if (isset($_SESSION["id"]) && isset($_POST["set_manager"])) {
+    if (isset($_SESSION["id"]) && isset($_POST["supervisor"])) {
         $supervisor = mysqli_real_escape_string($connection, $_POST["supervisor"]);
         if (setSupervisor($_SESSION["id"], $supervisor)) {
             $_SESSION["manager"] = $supervisor;
         }
-        header("Location: ../../index.php");
     }
+    header("Location: ../../index.php");
 ?>

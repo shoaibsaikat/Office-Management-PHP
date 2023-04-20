@@ -19,10 +19,10 @@
         <h4>My Manager</h4>
         <form action="includes/action/user_manager.php" method="post">
             <div class="form-group">
-                <label class="form-label" for="supervisor">Choose your manager</label>
-                <select class="form-control" name="supervisor" id="supervisor">
+                <select class="form-control" name="supervisor">
+                    <option selected disabled hidden>Select manager</option>
 <?php
-                if ($result = getAllUsers()) {
+                if ($result = getAllUsers($_SESSION["id"], $_SESSION["token"])) {
                     while ($row = mysqli_fetch_assoc($result)) {
                         if ($row["id"] != $_SESSION["id"] && $_SESSION["manager"] != $row["id"]) {
 ?>

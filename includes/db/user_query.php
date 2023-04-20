@@ -10,7 +10,17 @@ function registerUser($username, $firstname, $lastname, $email, $password) {
 }
 
 // read
-function getAllUsers() {
+function isValidUser($id, $token) {
+    global $connection;
+    $query = "SELECT * FROM user WHERE id = {$id} AND token = $token";
+    if (mysqli_query($connection, $query))
+        return false;
+    return true;
+}
+
+function getAllUsers($id, $token) {
+    if (!isValidUser($id, $token))
+        return null;
     global $connection;
     $query = "SELECT * FROM user";
     if ($result = mysqli_query($connection, $query))
@@ -20,7 +30,7 @@ function getAllUsers() {
 
 function getUserById($id) {
     global $connection;
-    $query = "SELECT * FROM user WHERE user_id = {$id}";
+    $query = "SELECT * FROM user WHERE id = {$id}";
     if ($result = mysqli_query($connection, $query))
         return $result;
     return null;
@@ -76,6 +86,35 @@ function updateUser($id, $firstname, $lastname, $username, $image, $role, $email
     if (!mysqli_query($connection, $query)) {
         die("UPDATE ERROR " . mysqli_error($connection));
     }
+}
+
+function generateToken($id) {
+    global $connection;
+    $time = strtotime("now");
+    $query = "SELECT * FROM user WHERE id = {$id}";
+    if ($result = getUserById($id)) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $tokenString = substr($row["password"].$time, 0 , 12);
+            $token = password_hash($tokenString, PASSWORD_BCRYPT, ["cost" => 12]);
+            $query = "UPDATE user SET ";
+            $query .= "token = '{$token}' ";
+            $query .= "WHERE id = {$id}";
+            if (!mysqli_query($connection, $query)) {
+                die("UPDATE ERROR " . mysqli_error($connection));
+                return null;
+            }
+            return $token;
+        }
+    }
+    return null;
+}
+
+function logout($id) {
+    global $connection;
+    $query = "UPDATE user SET ";
+    $query .= "token = NULL ";
+    $query .= "WHERE id = {$id}";
+    mysqli_query($connection, $query);
 }
 
 ?>
