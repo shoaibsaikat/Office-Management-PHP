@@ -32,40 +32,37 @@
                     <!-- Error message -->
                     <div class="text-danger"><?php echo $msg; ?></div>
 
-                    <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
-                        <div class="form-group">
-                            <label for="username" class="sr-only">User Name</label>
-                            <input type="text" name="username" id="username" class="form-control" placeholder="Enter Desired Username">
+                    <form action="registration.php" method="post" id="login-form" autocomplete="off">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" name="username" id="username" placeholder="Enter desired username">
                         </div>
-                        <div class="form-group">
-                            <label for="firstname" class="sr-only">First Name</label>
-                            <input type="text" name="firstname" id="firstname" class="form-control" placeholder="Enter First Name">
+                        <div class="mb-3">
+                            <label for="firstname" class="form-label">First Name</label>
+                            <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Enter first name">
                         </div>
-                        <div class="form-group">
-                            <label for="lastname" class="sr-only">Last Name</label>
-                            <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Enter Last Name">
+                        <div class="mb-3">
+                            <label for="lastname" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Enter last name">
                         </div>
-                        <div class="form-group">
-                            <label for="email" class="sr-only">Email</label>
-                            <input type="email" name="email" id="email" class="form-control" placeholder="somebody@example.com">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="somebody@example.com">
                         </div>
-                        <div class="form-group">
-                            <label for="password" class="sr-only">Password</label>
-                            <input type="password" name="password" id="key" class="form-control" placeholder="Password">
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" id="key" placeholder="Password">
                         </div>
-                        <div class="form-group">
-                            <label for="password2" class="sr-only">Enter password again</label>
-                            <input type="password2" name="password2" id="key" class="form-control" placeholder="Password2">
+                        <div class="mb-3">
+                            <label for="password2" class="form-label">Enter password again</label>
+                            <input type="password2" class="form-control" name="password2" id="key" placeholder="Enter password again">
                         </div>
-
-                        <input type="submit" name="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Register">
+                        <input type="submit" class="btn btn-primary" name="submit" id="btn-login" value="Register">
                     </form>
                 </div>
             </div> <!-- /.col-xs-12 -->
         </div> <!-- /.row -->
     </div> <!-- /.container -->
 </section>
-
-<hr>
 
 <?php include "includes/ui/footer.php";?>

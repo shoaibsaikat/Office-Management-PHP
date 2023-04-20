@@ -88,6 +88,16 @@ function updateUser($id, $firstname, $lastname, $username, $image, $role, $email
     }
 }
 
+function updatePassword($id, $token, $password) {
+    global $connection;
+    $query = "UPDATE user SET ";
+    $query .= "user_password = '{$password}' ";
+    $query .= "WHERE user_id = {$id} AND token = $token";
+    if (!mysqli_query($connection, $query)) {
+        die("UPDATE ERROR " . mysqli_error($connection));
+    }
+}
+
 function generateToken($id) {
     global $connection;
     $time = strtotime("now");
@@ -114,7 +124,9 @@ function logout($id) {
     $query = "UPDATE user SET ";
     $query .= "token = NULL ";
     $query .= "WHERE id = {$id}";
-    mysqli_query($connection, $query);
+    if (!mysqli_query($connection, $query)) {
+        die("UPDATE ERROR " . mysqli_error($connection));
+    }
 }
 
 ?>

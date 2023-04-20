@@ -3,9 +3,10 @@
 <?php session_start(); ?>
 
 <?php
-    if (isset($_POST["login"])) {
-        $u_name = mysqli_real_escape_string($connection, $_POST["username"]);
+    if (isset($_POST["set_password"])) {
         $u_pass = mysqli_real_escape_string($connection, $_POST["password"]);
+        $u_pass2 = mysqli_real_escape_string($connection, $_POST["password2"]);
+        $u_pass2 = mysqli_real_escape_string($connection, $_POST["password3"]);
 
         if ($result = getUserByUsername($u_name)) {
             while ($row = mysqli_fetch_assoc($result)) {

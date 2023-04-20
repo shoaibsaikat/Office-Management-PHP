@@ -1,26 +1,24 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.php">Home</a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-<?php if (!isset($_SESSION["id"])) { ?>
-                <li><a href='registration.php'>Registration</a></li>
-<?php } else { ?>
-                <li><a href='includes/action/user_logout.php'>Logout</a></li>
-<?php } ?>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.php">Home</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <!-- <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+        </li> -->
+        <?php if (!isset($_SESSION["id"])) { ?>
+        <li class="nav-item active">
+          <a class="nav-link" href="registration.php">Registration</a>
+        </li>
+        <?php } else { ?>
+        <li class="nav-item">
+          <a class="nav-link" href="includes/action/user_logout.php">Logout</a>
+        </li>
+        <?php } ?>
+      </ul>
     </div>
-    <!-- /.container -->
+  </div>
 </nav>
