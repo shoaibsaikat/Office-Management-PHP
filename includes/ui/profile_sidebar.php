@@ -27,16 +27,13 @@
         <h4>My Password</h4>
         <form action="includes/action/user_password.php" method="post">
             <div class="mb-3">
-                <label for="password" class="form-label">Enter current password</label>
                 <input type="password" class="form-control" name="password" id="password" placeholder="Current password">
             </div>
             <div class="mb-3">
-                <label for="password2" class="form-label">Enter new password</label>
                 <input type="password2" class="form-control" name="password2" id="password2" placeholder="New password">
             </div>
             <div class="mb-3">
-                <label for="password3" class="form-label">Enter password again</label>
-                <input type="password3" class="form-control" name="password3" id="password3" placeholder="New password">
+                <input type="password3" class="form-control" name="password3" id="password3" placeholder="Enter new password again">
             </div>
             <button type="submit" class="btn primary-color" name="set_password">Change</button>
         </form>

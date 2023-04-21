@@ -7,7 +7,7 @@
         Welcome 
 <?php
             if (isset($_SESSION["firstname"])) {
-                echo $_SESSION["firstname"].".";
+                echo $_SESSION["firstname"];
             }
 ?>
     </h1>
