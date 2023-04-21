@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+<nav class="navbar navbar-expand-lg navbar-light border-top border-bottom primary-color rounded-2">
   <div class="container-fluid">
     <a class="navbar-brand" href="index.php">Home</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,7 +21,7 @@
       </ul>
 <?php if (isset($_SESSION["id"])) { ?>
       <form class="d-flex" action="includes/action/user_logout.php" method="post">
-        <button class="btn btn-outline-success" type="submit" name="logout">Logout</button>
+        <button class="btn btn-outline-secondary text-light text-bg-secondary" type="submit" name="logout">Logout</button>
       </form>
 <?php } ?>
     </div>

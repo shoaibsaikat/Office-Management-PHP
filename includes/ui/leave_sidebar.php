@@ -3,7 +3,7 @@
     <div>
         <h4>Apply for leave</h4>
         <form action="#" method="post">
-            <button type="submit" class="btn btn-primary" name="apply_leave">Apply</button>
+            <button type="submit" class="btn primary-color" name="apply_leave">Apply</button>
         </form>
     </div>
     <hr>

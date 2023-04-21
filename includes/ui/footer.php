@@ -1,13 +1,9 @@
         <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>&copy; protected by Mina Shoaib Rahman 2023</p>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-        </footer>
+        <div>
+            <footer class="py-3 my-4 border-top border-bottom primary-color rounded-2">
+                <span class="text-muted">&nbsp;&nbsp;© 2023 Mina Shoaib Rahman</span>   
+            </footer>
+        </div>
     </div>
     <!-- /.container -->
     <!-- Bootstrap -->

@@ -2,7 +2,7 @@
 
 <div class="row">
     <!-- Home Column -->
-    <div class="col-md-8">
+    <div class="col-md-8 body-height">
     <h1 class="page-header">
 <?php
             if (isset($_SESSION["firstname"])) {
