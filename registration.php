@@ -26,7 +26,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-6 col-xs-offset-3">
+        <div class="col-md-6 col-md-offset-3 body-height">
             <div class="form-wrap">
             <h1>Register</h1>
                 <!-- Error message -->
@@ -51,13 +51,13 @@
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password" id="key" placeholder="Password">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                     </div>
                     <div class="mb-3">
                         <label for="password2" class="form-label">Enter password again</label>
-                        <input type="password2" class="form-control" name="password2" id="key" placeholder="Enter password again">
+                        <input type="password2" class="form-control" name="password2" id="password2" placeholder="Enter password again">
                     </div>
-                    <input type="submit" class="btn btn-primary" name="submit" id="btn-login" value="Register">
+                    <input type="submit" class="btn primary-color" name="submit" id="btn-login" value="Register">
                 </form>
             </div>
         </div> <!-- /.col-xs-12 -->
