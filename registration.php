@@ -23,46 +23,46 @@
     }
 ?>
 
-<section id="login">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-6 col-xs-offset-3">
-                <div class="form-wrap">
-                <h1>Register</h1>
-                    <!-- Error message -->
-                    <div class="text-danger"><?php echo $msg; ?></div>
 
-                    <form action="registration.php" method="post" id="login-form" autocomplete="off">
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" name="username" id="username" placeholder="Enter desired username">
-                        </div>
-                        <div class="mb-3">
-                            <label for="firstname" class="form-label">First Name</label>
-                            <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Enter first name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="lastname" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Enter last name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email" id="email" placeholder="somebody@example.com">
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" id="key" placeholder="Password">
-                        </div>
-                        <div class="mb-3">
-                            <label for="password2" class="form-label">Enter password again</label>
-                            <input type="password2" class="form-control" name="password2" id="key" placeholder="Enter password again">
-                        </div>
-                        <input type="submit" class="btn btn-primary" name="submit" id="btn-login" value="Register">
-                    </form>
-                </div>
-            </div> <!-- /.col-xs-12 -->
-        </div> <!-- /.row -->
-    </div> <!-- /.container -->
-</section>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6 col-xs-offset-3">
+            <div class="form-wrap">
+            <h1>Register</h1>
+                <!-- Error message -->
+                <div class="text-danger"><?php echo $msg; ?></div>
+
+                <form action="registration.php" method="post" id="login-form" autocomplete="off">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Enter desired username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="firstname" class="form-label">First Name</label>
+                        <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Enter first name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastname" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Enter last name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="somebody@example.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="password" id="key" placeholder="Password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password2" class="form-label">Enter password again</label>
+                        <input type="password2" class="form-control" name="password2" id="key" placeholder="Enter password again">
+                    </div>
+                    <input type="submit" class="btn btn-primary" name="submit" id="btn-login" value="Register">
+                </form>
+            </div>
+        </div> <!-- /.col-xs-12 -->
+    </div> <!-- /.row -->
+</div> <!-- /.container -->
+
 
 <?php include "includes/ui/footer.php";?>
