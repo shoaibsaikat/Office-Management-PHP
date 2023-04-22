@@ -17,16 +17,18 @@ function getAllLeaveByUserInCurrentYear($id, $page) {
     $limit = ENV_PAGE_LIMIT;
     $query = "SELECT * FROM `leave` WHERE user_id = {$id} AND YEAR(start_date) = YEAR(CURDATE()) ORDER BY start_date DESC ";
     $query .= "LIMIT {$limit} OFFSET {$offset}";
-    if ($result = mysqli_query($connection, $query))
+    if ($result = mysqli_query($connection, $query)) {
         return $result;
+    }
     return null;
 }
 
 function getAllLeaveCountByUserInCurrentYear($id) {
     global $connection;
     $query = "SELECT * FROM `leave` WHERE user_id = {$id} AND YEAR(start_date) = YEAR(CURDATE()) ORDER BY start_date DESC";
-    if ($result = mysqli_query($connection, $query))
+    if ($result = mysqli_query($connection, $query)) {
         return mysqli_num_rows($result);
+    }
     return 0;
 }
 
@@ -40,8 +42,9 @@ function getAllPendingLeaveByApproverInCurrentYear($id, $page) {
     $query .= "WHERE approver_id = {$id} AND approved IS NULL AND YEAR(start_date) = YEAR(CURDATE()) ";
     $query .= "ORDER BY start_date ";
     $query .= "LIMIT {$limit} OFFSET {$offset}";
-    if ($result = mysqli_query($connection, $query))
+    if ($result = mysqli_query($connection, $query)) {
         return $result;
+    }
     return null;
 }
 
@@ -51,8 +54,9 @@ function getAllPendingLeaveCountByApproverInCurrentYear($id) {
     $query .= "FROM `leave` INNER JOIN `user` ON user.id = leave.user_id ";
     $query .= "WHERE approver_id = {$id} AND approved IS NULL AND YEAR(start_date) = YEAR(CURDATE()) ";
     $query .= "ORDER BY start_date";
-    if ($result = mysqli_query($connection, $query))
-    return mysqli_num_rows($result);
+    if ($result = mysqli_query($connection, $query)) {
+        return mysqli_num_rows($result);
+    }
     return 0;
 }
 
@@ -64,8 +68,9 @@ function leaveApprove($id) {
     $query .= "approved = '1', ";
     $query .= "approve_date = {$now} ";
     $query .= "WHERE id = {$id}";
-    if (!mysqli_query($connection, $query))
+    if (!mysqli_query($connection, $query)) {
         die("UPDATE ERROR " . mysqli_error($connection));
+    }
 }
 
 function leaveDecline($id) {
@@ -74,7 +79,8 @@ function leaveDecline($id) {
     $query = "UPDATE `leave` SET ";
     $query .= "approved = '0' ";
     $query .= "WHERE id = {$id}";
-    if (!mysqli_query($connection, $query))
+    if (!mysqli_query($connection, $query)) {
         die("UPDATE ERROR " . mysqli_error($connection));
+    }
 }
 ?>

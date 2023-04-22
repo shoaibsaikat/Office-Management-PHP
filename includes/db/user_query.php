@@ -7,16 +7,18 @@ function registerUser($username, $firstname, $lastname, $email, $password) {
     $now = date("Y-m-d");
     $query = "INSERT INTO user (username, first_name, last_name, email, password, is_active, date_joined) ";
     $query .= "VALUES ('{$username}', '{$firstname}', '{$lastname}', '{$email}', '{$password}', '1', '{$now}')";
-    if (!mysqli_query($connection, $query))
+    if (!mysqli_query($connection, $query)) {
         die("INSERT ERROR " . mysqli_error($connection));
+    }
 }
 
 // read
 function validUser($id, $token) {
     global $connection;
     $query = "SELECT * FROM user WHERE id = {$id} AND token = $token";
-    if (mysqli_query($connection, $query))
+    if (mysqli_query($connection, $query)) {
         return false;
+    }
     return true;
 }
 
@@ -25,24 +27,27 @@ function getAllUsers($id, $token) {
         return null;
     global $connection;
     $query = "SELECT * FROM user";
-    if ($result = mysqli_query($connection, $query))
+    if ($result = mysqli_query($connection, $query)) {
         return $result;
+    }
     return null;
 }
 
 function getUserById($id) {
     global $connection;
     $query = "SELECT * FROM user WHERE id = {$id}";
-    if ($result = mysqli_query($connection, $query))
+    if ($result = mysqli_query($connection, $query)) {
         return $result;
+    }
     return null;
 }
 
 function getUserByUsername($name) {
     global $connection;
     $query = "SELECT * FROM user WHERE username = '{$name}'";
-    if ($result = mysqli_query($connection, $query))
+    if ($result = mysqli_query($connection, $query)) {
         return $result;
+    }
     return null;
 }
 
@@ -50,8 +55,9 @@ function duplicateUsername($name) {
     global $connection;
     $query = "SELECT * FROM user WHERE username = '{$name}'";
     if ($result = mysqli_query($connection, $query)) {
-        if (mysqli_num_rows($result) == 0)
+        if (mysqli_num_rows($result) == 0) {
             return false;
+        }
         return true;
     }
     return false;
@@ -91,8 +97,9 @@ function updatePassword($id, $token, $old_passowrd, $new_password) {
     $query = "UPDATE user SET ";
     $query .= "password = '{$new_password}' ";
     $query .= "WHERE id = {$id} AND token = '{$token}' AND password = '{$old_passowrd}'";
-    if (!mysqli_query($connection, $query))
+    if (!mysqli_query($connection, $query)) {
         die("UPDATE ERROR " . mysqli_error($connection));
+    }
     return generateToken($id, $new_password);
 }
 
@@ -116,7 +123,8 @@ function logout($id) {
     $query = "UPDATE user SET ";
     $query .= "token = NULL ";
     $query .= "WHERE id = {$id}";
-    if (!mysqli_query($connection, $query))
+    if (!mysqli_query($connection, $query)) {
         die("UPDATE ERROR " . mysqli_error($connection));
+    }
 }
 ?>
