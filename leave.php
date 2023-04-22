@@ -42,6 +42,7 @@ if ($result = getAllLeaveByUserInCurrentYear($_SESSION["id"])) {
     <!-- Sidebar Widgets Column -->
     <?php include "includes/ui/leave_sidebar.php"; ?>
     <!-- Leave Approval Column -->
+<?php if (isset($_SESSION["can_approve_leave"]) && $_SESSION["can_approve_leave"]) { ?>
     <hr>
     <div class="col-md-8">
         <h1 class="page-header">Leave Approval</h1>
@@ -60,20 +61,24 @@ if ($result = getAllLeaveByUserInCurrentYear($_SESSION["id"])) {
                 </thead>
                 <tbody>
 <?php
-if ($result = getAllLeaveByUserInCurrentYear($_SESSION["id"])) {
+if ($result = getAllPendingLeaveByApproverInCurrentYear($_SESSION["id"])) {
     $count = 0;
-    $total = 0;
     while ($row = mysqli_fetch_assoc($result)) {
-        $total += $row["day_count"];
 ?>
                     <tr>
                         <th scope="row"><?php echo ++$count; ?></th>
-                        <td><?php echo $row["user_id"]; ?></td>
+                        <td><?php echo $row["first_name"]." ".$row["last_name"]; ?></td>
                         <td><?php echo getPrintableDate($row["start_date"]); ?></td>
                         <td><?php echo $row["day_count"]; ?></td>
                         <td><?php echo $row["comment"]; ?></td>
-                        <td><form action="" method="post"><button type="submit" class="btn primary-color" name="approve_leave">Approve</button></form></td>
-                        <td><form action="" method="post"><button type="submit" class="btn secondary-color" name="decline_leave">Decline</button></form></td>
+                        <td><form action="includes/action/leave_approval.php" method="post">
+                            <input type="text" name="leave" hidden value="<?php echo $row["id"]; ?>">
+                            <button type="submit" class="btn primary-color" name="leave_approve">Approve</button>
+                        </form></td>
+                        <td><form action="includes/action/leave_approval.php" method="post">
+                            <input type="text" name="leave" hidden value="<?php echo $row["id"]; ?>">
+                            <button type="submit" class="btn secondary-color" name="leave_decline">Decline</button>
+                        </form></td>
                     </tr>
 <?php
         }
@@ -83,6 +88,7 @@ if ($result = getAllLeaveByUserInCurrentYear($_SESSION["id"])) {
             </table>
         </div>
     </div>
+<?php } ?>
 </div>
 <!-- /.row -->
 <?php include "includes/ui/footer.php"; ?>

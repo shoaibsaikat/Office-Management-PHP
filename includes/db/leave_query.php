@@ -19,13 +19,35 @@ function getAllLeaveByUserInCurrentYear($id) {
     return null;
 }
 
+// if approved is NULL then it's pending, if it's 0 then it's disapproved
+function getAllPendingLeaveByApproverInCurrentYear($id) {
+    global $connection;
+    $query = "SELECT leave.id, leave.start_date, leave.day_count, leave.comment, user.first_name, user.last_name ";
+    $query .= "FROM `leave` INNER JOIN `user` ON user.id = leave.user_id ";
+    $query .= "WHERE approver_id = {$id} AND approved IS NULL ";
+    $query .= "ORDER BY start_date";
+    if ($result = mysqli_query($connection, $query))
+        return $result;
+    return null;
+}
+
 // update
-function approveLeave($id) {
+function leaveApprove($id) {
     global $connection;
     $now = date("Y-m-d");
     $query = "UPDATE `leave` SET ";
     $query .= "approved = '1', ";
     $query .= "approve_date = {$now} ";
+    $query .= "WHERE id = {$id}";
+    if (!mysqli_query($connection, $query))
+        die("UPDATE ERROR " . mysqli_error($connection));
+}
+
+function leaveDecline($id) {
+    global $connection;
+    $now = date("Y-m-d");
+    $query = "UPDATE `leave` SET ";
+    $query .= "approved = '0' ";
     $query .= "WHERE id = {$id}";
     if (!mysqli_query($connection, $query))
         die("UPDATE ERROR " . mysqli_error($connection));

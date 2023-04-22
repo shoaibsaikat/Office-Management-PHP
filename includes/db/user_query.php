@@ -5,8 +5,8 @@ function registerUser($username, $firstname, $lastname, $email, $password) {
     if (duplicateUsername($username))
         return;
     $now = date("Y-m-d");
-    $query = "INSERT INTO user (username, first_name, last_name, email, password, date_joined) ";
-    $query .= "VALUES ('{$username}', '{$firstname}', '{$lastname}', '{$email}', '{$password}', '{$now}')";
+    $query = "INSERT INTO user (username, first_name, last_name, email, password, is_active, date_joined) ";
+    $query .= "VALUES ('{$username}', '{$firstname}', '{$lastname}', '{$email}', '{$password}', '1', '{$now}')";
     if (!mysqli_query($connection, $query))
         die("INSERT ERROR " . mysqli_error($connection));
 }

@@ -6,11 +6,12 @@
     <h1 class="page-header">
         Welcome 
 <?php
-            if (isset($_SESSION["firstname"])) {
-                echo $_SESSION["firstname"];
-            }
+        if (isset($_SESSION["firstname"])) {
+            echo $_SESSION["firstname"];
+        }
 ?>
     </h1>
+        <p><?php echo $_SESSION["email"]; ?></p>
     </div>
     <!-- Sidebar Widgets Column -->
     <?php include "includes/ui/profile_sidebar.php"; ?>

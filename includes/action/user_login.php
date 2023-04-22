@@ -17,7 +17,11 @@
                         $_SESSION["username"] = $row["username"];
                         $_SESSION["firstname"] = $row["first_name"];
                         $_SESSION["lastname"] = $row["last_name"];
+                        $_SESSION["email"] = $row["email"];
                         $_SESSION["manager"] = $row["supervisor_id"];
+                        $_SESSION["is_active"] = $row["is_active"];
+                        $_SESSION["is_superuser"] = $row["is_superuser"];
+                        $_SESSION["can_approve_leave"] = $row["can_approve_leave"];
                     }
                     // echo "<script>console.log('{$token}');</script>";
                     break;
