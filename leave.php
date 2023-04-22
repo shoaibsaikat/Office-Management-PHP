@@ -1,6 +1,6 @@
 <?php include "includes/ui/header.php"; ?>
 
-<div class="row body-height">
+<div class="row">
     <!-- Own Leave Column -->
     <div class="col-md-8">
         <h1 class="page-header">Your leave this year</h1>

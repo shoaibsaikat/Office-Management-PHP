@@ -13,7 +13,7 @@ function createLeave($user, $approver, $start, $days, $reason) {
 // read
 function getAllLeaveByUserInCurrentYear($id) {
     global $connection;
-    $query = "SELECT * FROM `leave` WHERE user_id = {$id} ORDER BY start_date DESC";
+    $query = "SELECT * FROM `leave` WHERE user_id = {$id} AND YEAR(start_date) = YEAR(CURDATE()) ORDER BY start_date DESC";
     if ($result = mysqli_query($connection, $query))
         return $result;
     return null;
@@ -24,7 +24,7 @@ function getAllPendingLeaveByApproverInCurrentYear($id) {
     global $connection;
     $query = "SELECT leave.id, leave.start_date, leave.day_count, leave.comment, user.first_name, user.last_name ";
     $query .= "FROM `leave` INNER JOIN `user` ON user.id = leave.user_id ";
-    $query .= "WHERE approver_id = {$id} AND approved IS NULL ";
+    $query .= "WHERE approver_id = {$id} AND approved IS NULL AND YEAR(start_date) = YEAR(CURDATE()) ";
     $query .= "ORDER BY start_date";
     if ($result = mysqli_query($connection, $query))
         return $result;
