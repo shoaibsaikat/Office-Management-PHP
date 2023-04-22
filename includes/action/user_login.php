@@ -23,7 +23,6 @@
                         $_SESSION["is_superuser"] = $row["is_superuser"];
                         $_SESSION["can_approve_leave"] = $row["can_approve_leave"];
                     }
-                    // echo "<script>console.log('{$token}');</script>";
                     break;
                 }
             }

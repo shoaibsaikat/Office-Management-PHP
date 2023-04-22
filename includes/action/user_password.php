@@ -20,7 +20,6 @@
                         $_SESSION["lastname"] = $row["last_name"];
                         $_SESSION["manager"] = $row["supervisor_id"];
                     }
-                    // echo "<script>console.log('{$token}');</script>";
                     break;
                 }
             }

@@ -1,5 +1,26 @@
 <?php include "includes/ui/header.php"; ?>
 
+<!-- page variables -->
+<?php
+if (!isset($_GET['ml'])) {
+	$currentPageMyLeave = 1;
+} else {
+	$currentPageMyLeave = $_GET['ml'];
+}
+
+$myLeaveCount = getAllLeaveCountByUserInCurrentYear($_SESSION["id"]);
+$totalPageMyLeave = ceil($myLeaveCount / ENV_PAGE_LIMIT);
+
+if (!isset($_GET['la'])) {
+	$currentPageLeaveApproval = 1;
+} else {
+	$currentPageLeaveApproval = $_GET['la'];
+}
+
+$myLeaveApprovalCount = getAllPendingLeaveCountByApproverInCurrentYear($_SESSION["id"]);
+$totalPageLeaveApproval = ceil($myLeaveApprovalCount / ENV_PAGE_LIMIT);
+?>
+
 <div class="row">
     <!-- Own Leave Column -->
     <div class="col-md-8">
@@ -16,7 +37,7 @@
                 </thead>
                 <tbody>
 <?php
-if ($result = getAllLeaveByUserInCurrentYear($_SESSION["id"])) {
+if ($result = getAllLeaveByUserInCurrentYear($_SESSION["id"], $currentPageMyLeave)) {
     $count = 0;
     $total = 0;
     while ($row = mysqli_fetch_assoc($result)) {
@@ -27,13 +48,13 @@ if ($result = getAllLeaveByUserInCurrentYear($_SESSION["id"])) {
                         <td><?php echo getPrintableDate($row["start_date"]); ?></td>
                         <td>
 <?php
-    if ($row["approved"] == null) {
-        echo "Waiting for approval";
-    } else if ($row["approved"] == 0) {
-        echo "Not approved";
-    } else {
-        echo "Approved";
-    }
+                            if ($row["approved"] == null) {
+                                echo "Waiting for approval";
+                            } else if ($row["approved"] == 0) {
+                                echo "Not approved";
+                            } else {
+                                echo "Approved";
+                            }
 ?>
                         </td>
                         <td><?php echo $row["day_count"]; ?></td>
@@ -48,6 +69,22 @@ if ($result = getAllLeaveByUserInCurrentYear($_SESSION["id"])) {
                 </tbody>
             </table>
         </div>
+        <nav>
+            <ul class="pagination">
+                <!-- <li class="page-item"><a class="page-link" href="#">Previous</a></li> -->
+<?php
+                for ($i = 0; $i < $totalPageMyLeave; $i++) {
+                    $page = $i + 1;
+                    if ($currentPageMyLeave == $page) {
+                        echo "<li class='page-item active'><a class='page-link' href='leave.php?ml={$page}'>{$page}</a></li>";
+                    } else {
+                        echo "<li class='page-item'><a class='page-link' href='leave.php?ml={$page}'>{$page}</a></li>";
+                    }
+                }
+?>
+                <!-- <li class="page-item"><a class="page-link" href="#">Next</a></li> -->
+            </ul>
+        </nav>
     </div>
     <!-- Sidebar Widgets Column -->
     <?php include "includes/ui/leave_sidebar.php"; ?>

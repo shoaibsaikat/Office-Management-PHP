@@ -11,12 +11,23 @@ function createLeave($user, $approver, $start, $days, $reason) {
 }
 
 // read
-function getAllLeaveByUserInCurrentYear($id) {
+function getAllLeaveByUserInCurrentYear($id, $page) {
     global $connection;
-    $query = "SELECT * FROM `leave` WHERE user_id = {$id} AND YEAR(start_date) = YEAR(CURDATE()) ORDER BY start_date DESC";
+    $offset = ($page - 1) * ENV_PAGE_LIMIT;
+    $limit = ENV_PAGE_LIMIT;
+    $query = "SELECT * FROM `leave` WHERE user_id = {$id} AND YEAR(start_date) = YEAR(CURDATE()) ORDER BY start_date DESC ";
+    $query .= "LIMIT {$limit} OFFSET {$offset}";
     if ($result = mysqli_query($connection, $query))
         return $result;
     return null;
+}
+
+function getAllLeaveCountByUserInCurrentYear($id) {
+    global $connection;
+    $query = "SELECT * FROM `leave` WHERE user_id = {$id} AND YEAR(start_date) = YEAR(CURDATE()) ORDER BY start_date DESC";
+    if ($result = mysqli_query($connection, $query))
+        return mysqli_num_rows($result);
+    return 0;
 }
 
 // if approved is NULL then it's pending, if it's 0 then it's disapproved
@@ -29,6 +40,17 @@ function getAllPendingLeaveByApproverInCurrentYear($id) {
     if ($result = mysqli_query($connection, $query))
         return $result;
     return null;
+}
+
+function getAllPendingLeaveCountByApproverInCurrentYear($id) {
+    global $connection;
+    $query = "SELECT leave.id, leave.start_date, leave.day_count, leave.comment, user.first_name, user.last_name ";
+    $query .= "FROM `leave` INNER JOIN `user` ON user.id = leave.user_id ";
+    $query .= "WHERE approver_id = {$id} AND approved IS NULL AND YEAR(start_date) = YEAR(CURDATE()) ";
+    $query .= "ORDER BY start_date";
+    if ($result = mysqli_query($connection, $query))
+    return mysqli_num_rows($result);
+    return 0;
 }
 
 // update
