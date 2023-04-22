@@ -4,9 +4,8 @@ function registerUser($username, $firstname, $lastname, $email, $password) {
     global $connection;
     $query = "INSERT INTO user (username, first_name, last_name, email, password) ";
     $query .= "VALUES ('{$username}', '{$firstname}', '{$lastname}', '{$email}', '{$password}')";
-    if (!mysqli_query($connection, $query)) {
+    if (!mysqli_query($connection, $query))
         die("INSERT ERROR " . mysqli_error($connection));
-    }
 }
 
 // read
@@ -83,9 +82,8 @@ function updateUser($id, $firstname, $lastname, $username, $image, $role, $email
     $query .= "user_email = '{$email}', ";
     $query .= "user_password = '{$password}' ";
     $query .= "WHERE user_id = {$id}";
-    if (!mysqli_query($connection, $query)) {
+    if (!mysqli_query($connection, $query))
         die("UPDATE ERROR " . mysqli_error($connection));
-    }
 }
 
 function updatePassword($id, $token, $password) {
@@ -93,9 +91,8 @@ function updatePassword($id, $token, $password) {
     $query = "UPDATE user SET ";
     $query .= "user_password = '{$password}' ";
     $query .= "WHERE user_id = {$id} AND token = $token";
-    if (!mysqli_query($connection, $query)) {
+    if (!mysqli_query($connection, $query))
         die("UPDATE ERROR " . mysqli_error($connection));
-    }
 }
 
 function generateToken($id) {
@@ -124,9 +121,8 @@ function logout($id) {
     $query = "UPDATE user SET ";
     $query .= "token = NULL ";
     $query .= "WHERE id = {$id}";
-    if (!mysqli_query($connection, $query)) {
+    if (!mysqli_query($connection, $query))
         die("UPDATE ERROR " . mysqli_error($connection));
-    }
 }
 
 ?>
