@@ -14,8 +14,12 @@
                 $u_last_name = mysqli_real_escape_string($connection, $_POST["lastname"]);
                 $u_email = mysqli_real_escape_string($connection, $_POST["email"]);
                 $u_pass = password_hash($u_pass, PASSWORD_BCRYPT, ["cost" => 12]);
-                registerUser($u_name, $u_first_name, $u_last_name, $u_email, $u_pass);
-                header("Location: index.php");
+                if (duplicateUsername($u_name)) {
+                    $msg = "Username already exists, please choose a different username";
+                } else {
+                    registerUser($u_name, $u_first_name, $u_last_name, $u_email, $u_pass);
+                    header("Location: index.php");
+                }
             }
         } else {
             $msg = "Fields can't be empty!";

@@ -2,14 +2,17 @@
 // create
 function registerUser($username, $firstname, $lastname, $email, $password) {
     global $connection;
-    $query = "INSERT INTO user (username, first_name, last_name, email, password) ";
-    $query .= "VALUES ('{$username}', '{$firstname}', '{$lastname}', '{$email}', '{$password}')";
+    if (duplicateUsername($username))
+        return;
+    $now = date("Y-m-d");
+    $query = "INSERT INTO user (username, first_name, last_name, email, password, date_joined) ";
+    $query .= "VALUES ('{$username}', '{$firstname}', '{$lastname}', '{$email}', '{$password}', '{$now}')";
     if (!mysqli_query($connection, $query))
         die("INSERT ERROR " . mysqli_error($connection));
 }
 
 // read
-function isValidUser($id, $token) {
+function validUser($id, $token) {
     global $connection;
     $query = "SELECT * FROM user WHERE id = {$id} AND token = $token";
     if (mysqli_query($connection, $query))
@@ -18,7 +21,7 @@ function isValidUser($id, $token) {
 }
 
 function getAllUsers($id, $token) {
-    if (!isValidUser($id, $token))
+    if (!validUser($id, $token))
         return null;
     global $connection;
     $query = "SELECT * FROM user";
@@ -43,10 +46,9 @@ function getUserByUsername($name) {
     return null;
 }
 
-function isDuplicateUsername($name) {
+function duplicateUsername($name) {
     global $connection;
-    $query = "SELECT * FROM user WHERE user_username = '{$name}'";
-
+    $query = "SELECT * FROM user WHERE username = '{$name}'";
     if ($result = mysqli_query($connection, $query)) {
         if (mysqli_num_rows($result) == 0)
             return false;
@@ -71,19 +73,17 @@ function setSupervisor($user_id, $supervisor_id) {
     return false;
 }
 
-function updateUser($id, $firstname, $lastname, $username, $image, $role, $email, $password) {
+function login($id) {
     global $connection;
+    $now = date("Y-m-d");
     $query = "UPDATE user SET ";
-    $query .= "user_firstname = '{$firstname}', ";
-    $query .= "user_lastname = '{$lastname}', ";
-    $query .= "user_username = '{$username}', ";
-    $query .= "user_image = '{$image}', ";
-    $query .= "user_role = '{$role}', ";
-    $query .= "user_email = '{$email}', ";
-    $query .= "user_password = '{$password}' ";
-    $query .= "WHERE user_id = {$id}";
-    if (!mysqli_query($connection, $query))
+    $query .= "last_login = '{$now}' ";
+    $query .= "WHERE id = {$id}";
+    if (!mysqli_query($connection, $query)) {
         die("UPDATE ERROR " . mysqli_error($connection));
+        return false;
+    }
+    return true;
 }
 
 function updatePassword($id, $token, $password) {
@@ -99,7 +99,7 @@ function generateToken($id) {
     global $connection;
     $time = strtotime("now");
     $query = "SELECT * FROM user WHERE id = {$id}";
-    if ($result = getUserById($id)) {
+    if (login($id) && $result = getUserById($id)) {
         while ($row = mysqli_fetch_assoc($result)) {
             $tokenString = substr($row["password"].$time, 0 , 12);
             $token = password_hash($tokenString, PASSWORD_BCRYPT, ["cost" => 12]);
@@ -124,5 +124,4 @@ function logout($id) {
     if (!mysqli_query($connection, $query))
         die("UPDATE ERROR " . mysqli_error($connection));
 }
-
 ?>
