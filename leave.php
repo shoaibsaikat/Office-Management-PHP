@@ -60,29 +60,33 @@ if ($result = getAllLeaveByUserInCurrentYear($_SESSION["id"], $currentPageMyLeav
                         <td><?php echo $row["day_count"]; ?></td>
                     </tr>
 <?php } ?>
-                    <tr class="primary-color">
+                    <!-- <tr class="primary-color">
                         <th scope="row">Total</th>
                         <td colspan="2"></td>
                         <td><?php echo $total; ?></td>
-                    </tr>
+                    </tr> -->
 <?php } ?>
                 </tbody>
             </table>
         </div>
         <nav>
             <ul class="pagination">
-                <!-- <li class="page-item"><a class="page-link" href="#">Previous</a></li> -->
 <?php
-                for ($i = 0; $i < $totalPageMyLeave; $i++) {
-                    $page = $i + 1;
-                    if ($currentPageMyLeave == $page) {
-                        echo "<li class='page-item active'><a class='page-link' href='leave.php?ml={$page}'>{$page}</a></li>";
+                // only three or less page number will be shown
+                $maxViewPageMyLeave = $totalPageMyLeave > $currentPageMyLeave + 1 ? $currentPageMyLeave + 1 : $totalPageMyLeave;
+                if ($currentPageMyLeave > 1) {
+                    $i = $currentPageMyLeave - 1;
+                } else {
+                    $i = $currentPageMyLeave;
+                }
+                for (; $i <= $maxViewPageMyLeave; $i++) {
+                    if ($currentPageMyLeave == $i) {
+                        echo "<li class='page-item active'><a class='page-link' href='leave.php?ml={$i}'>{$i}</a></li>";
                     } else {
-                        echo "<li class='page-item'><a class='page-link' href='leave.php?ml={$page}'>{$page}</a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='leave.php?ml={$i}'>{$i}</a></li>";
                     }
                 }
 ?>
-                <!-- <li class="page-item"><a class="page-link" href="#">Next</a></li> -->
             </ul>
         </nav>
     </div>
