@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2023 at 10:10 AM
+-- Generation Time: Apr 22, 2023 at 12:18 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -46,7 +46,13 @@ CREATE TABLE `leave` (
 INSERT INTO `leave` (`id`, `creation_date`, `approved`, `approve_date`, `start_date`, `day_count`, `comment`, `approver_id`, `user_id`) VALUES
 (19, '2023-04-22 00:00:00.000000', 0, NULL, '2023-04-26 00:00:00.000000', 1, 'Personal reason', 11, 8),
 (20, '2023-04-22 00:00:00.000000', 1, '0000-00-00 00:00:00.000000', '2023-06-13 00:00:00.000000', 2, 'Family trip', 11, 8),
-(21, '2023-04-22 00:00:00.000000', NULL, NULL, '2023-08-24 00:00:00.000000', 1, 'Birthday', 11, 8);
+(21, '2023-04-22 00:00:00.000000', NULL, NULL, '2023-08-24 00:00:00.000000', 1, 'Birthday', 11, 8),
+(22, '2023-04-22 00:00:00.000000', NULL, NULL, '2023-10-10 00:00:00.000000', 1, 'Official birthday', 11, 8),
+(23, '2023-04-22 00:00:00.000000', NULL, NULL, '2023-12-14 00:00:00.000000', 3, 'Family trip', 11, 8),
+(24, '2023-04-22 00:00:00.000000', NULL, NULL, '2023-08-17 00:00:00.000000', 4, 'Tour to outside', 11, 8),
+(26, '2023-04-22 00:00:00.000000', NULL, NULL, '2023-07-19 00:00:00.000000', 1, 'Casual leave', 11, 8),
+(27, '2023-04-22 00:00:00.000000', NULL, NULL, '2023-05-01 00:00:00.000000', 3, 'Need to go to village', 11, 12),
+(28, '2023-04-22 00:00:00.000000', 1, '0000-00-00 00:00:00.000000', '2023-05-17 00:00:00.000000', 5, 'Marriage leave', 11, 12);
 
 -- --------------------------------------------------------
 
@@ -76,8 +82,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `password`, `token`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_active`, `date_joined`, `supervisor_id`, `can_approve_leave`) VALUES
 (8, '$2y$12$fxJM6zhxYfXO8sjKKxdVu.bYduNRydSXjfIaAgxtCzdbSzv8y.AJW', NULL, '2023-04-22 00:00:00.000000', 0, 'shoaib.rahman', 'Shoaib', 'Mina', 'shoaib.rahman@beza.gov.bd', 1, '0000-00-00 00:00:00.000000', 11, 0),
-(11, '$2y$12$qdz.2fjbXwDbCM5k9Cvd/Onv33M0ZQNSn8S7GKmVzd3BJmY0CdNw2', '$2y$12$iCOxrcVGqnTj52sSRPZ/W.FN7/KZeyKylubytByY8CLPxUFOwUHzm', '2023-04-22 00:00:00.000000', 0, 'approver', 'Approver', '', 'approver@someone.com', 1, '0000-00-00 00:00:00.000000', NULL, 1),
-(12, '$2y$12$P2blsCH4EjV94el5C.NaW.FEREAt7RCBlWVMiaTfvsABnhWqW6t1u', NULL, '2023-04-22 00:00:00.000000', 0, 'distributor', 'Distributor', 'Officer', 'abc@abc.com', 1, '2023-04-22 00:00:00.000000', NULL, 0);
+(11, '$2y$12$qdz.2fjbXwDbCM5k9Cvd/Onv33M0ZQNSn8S7GKmVzd3BJmY0CdNw2', '$2y$12$JUVUifzwdBk6DVCEkhL7pebfWyKWoT0K2uEDoKX1VPn8bfPQJnY9m', '2023-04-22 00:00:00.000000', 0, 'approver', 'Approver', '', 'approver@someone.com', 1, '0000-00-00 00:00:00.000000', NULL, 1),
+(12, '$2y$12$P2blsCH4EjV94el5C.NaW.FEREAt7RCBlWVMiaTfvsABnhWqW6t1u', NULL, '2023-04-22 00:00:00.000000', 0, 'distributor', 'Distributor', 'Officer', 'abc@abc.com', 1, '2023-04-22 00:00:00.000000', 11, 0);
 
 --
 -- Indexes for dumped tables
@@ -107,7 +113,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `leave`
 --
 ALTER TABLE `leave`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `user`
