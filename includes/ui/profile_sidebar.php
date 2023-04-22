@@ -19,7 +19,7 @@
     }
 ?>
             </select>
-            <button type="submit" class="btn primary-color" name="set_manager">Set</button>
+            <button type="submit" class="btn primary-button-color" name="set_manager">Set</button>
         </form>
     </div>
     <hr>
@@ -30,12 +30,12 @@
                 <input type="password" class="form-control" name="password" id="password" placeholder="Current password">
             </div>
             <div class="mb-3">
-                <input type="password2" class="form-control" name="password2" id="password2" placeholder="New password">
+                <input type="password" class="form-control" name="password2" id="password2" placeholder="New password">
             </div>
             <div class="mb-3">
-                <input type="password3" class="form-control" name="password3" id="password3" placeholder="Enter new password again">
+                <input type="password" class="form-control" name="password3" id="password3" placeholder="Enter new password again">
             </div>
-            <button type="submit" class="btn primary-color" name="set_password">Change</button>
+            <button type="submit" class="btn primary-button-color" name="set_password">Change</button>
         </form>
     </div>
 <?php } ?>

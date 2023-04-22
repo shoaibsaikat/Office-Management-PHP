@@ -6,22 +6,14 @@
     if (isset($_POST["set_password"])) {
         $u_pass = mysqli_real_escape_string($connection, $_POST["password"]);
         $u_pass2 = mysqli_real_escape_string($connection, $_POST["password2"]);
-        $u_pass2 = mysqli_real_escape_string($connection, $_POST["password3"]);
+        $u_pass3 = mysqli_real_escape_string($connection, $_POST["password3"]);
 
-        if ($result = getUserByUsername($u_name)) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                if (password_verify($u_pass, $row["password"])) {
-                    $token = generateToken($row["id"]);
-                    if ($token) {
-                        $_SESSION["id"] = $row["id"];
-                        $_SESSION["token"] = $token;
-                        $_SESSION["username"] = $row["username"];
-                        $_SESSION["firstname"] = $row["first_name"];
-                        $_SESSION["lastname"] = $row["last_name"];
-                        $_SESSION["manager"] = $row["supervisor_id"];
-                    }
-                    break;
-                }
+        if ($u_pass2 == $u_pass3) {
+            $u_pass = password_hash($u_pass, PASSWORD_BCRYPT, ["cost" => 12]);
+            $u_pass2 = password_hash($u_pass2, PASSWORD_BCRYPT, ["cost" => 12]);
+            $token = updatePassword($_SESSION["id"], $_SESSION["token"], $u_pass, $u_pass2);
+            if ($token) {
+                $_SESSION["token"] = $token;
             }
         }
         header("Location: ../../index.php");

@@ -62,7 +62,7 @@ function setSupervisor($user_id, $supervisor_id) {
     if ($user_id != $supervisor_id) {
         global $connection;
         $query = "UPDATE user SET ";
-        $query .= "supervisor_id = '{$supervisor_id}' ";
+        $query .= "supervisor_id = {$supervisor_id} ";
         $query .= "WHERE id = {$user_id}";
         if (!mysqli_query($connection, $query)) {
             die("UPDATE ERROR " . mysqli_error($connection));
@@ -86,34 +86,29 @@ function login($id) {
     return true;
 }
 
-function updatePassword($id, $token, $password) {
+function updatePassword($id, $token, $old_passowrd, $new_password) {
     global $connection;
     $query = "UPDATE user SET ";
-    $query .= "user_password = '{$password}' ";
-    $query .= "WHERE user_id = {$id} AND token = $token";
+    $query .= "password = '{$new_password}' ";
+    $query .= "WHERE id = {$id} AND token = '{$token}' AND password = '{$old_passowrd}'";
     if (!mysqli_query($connection, $query))
         die("UPDATE ERROR " . mysqli_error($connection));
+    return generateToken($id, $new_password);
 }
 
-function generateToken($id) {
+function generateToken($id, $password) {
     global $connection;
     $time = strtotime("now");
-    $query = "SELECT * FROM user WHERE id = {$id}";
-    if (login($id) && $result = getUserById($id)) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $tokenString = substr($row["password"].$time, 0 , 12);
-            $token = password_hash($tokenString, PASSWORD_BCRYPT, ["cost" => 12]);
-            $query = "UPDATE user SET ";
-            $query .= "token = '{$token}' ";
-            $query .= "WHERE id = {$id}";
-            if (!mysqli_query($connection, $query)) {
-                die("UPDATE ERROR " . mysqli_error($connection));
-                return null;
-            }
-            return $token;
-        }
+    $tokenString = substr($password.$time, 0 , 12);
+    $token = password_hash($tokenString, PASSWORD_BCRYPT, ["cost" => 12]);
+    $query = "UPDATE user SET ";
+    $query .= "token = '{$token}' ";
+    $query .= "WHERE id = {$id}";
+    if (!mysqli_query($connection, $query)) {
+        die("UPDATE ERROR " . mysqli_error($connection));
+        return null;
     }
-    return null;
+    return $token;
 }
 
 function logout($id) {

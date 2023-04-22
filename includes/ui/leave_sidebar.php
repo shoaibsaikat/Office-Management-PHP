@@ -15,7 +15,7 @@
             <div class="mb-3">
                 <input type="text" class="form-control" name="reason" placeholder="Enter short reason" maxlength="45">
             </div>
-            <button type="submit" class="btn primary-color" name="apply_leave">Apply</button>
+            <button type="submit" class="btn primary-button-color" name="apply_leave">Apply</button>
         </form>
     </div>
 <?php

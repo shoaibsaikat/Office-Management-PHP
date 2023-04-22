@@ -127,11 +127,11 @@ if ($result = getAllPendingLeaveByApproverInCurrentYear($_SESSION["id"], $curren
                         <td><?php echo $row["comment"]; ?></td>
                         <td><form action="includes/action/leave_approval.php" method="post">
                             <input type="text" name="leave" hidden value="<?php echo $row["id"]; ?>">
-                            <button type="submit" class="btn primary-color" name="leave_approve">Approve</button>
+                            <button type="submit" class="btn primary-button-color" name="leave_approve">Approve</button>
                         </form></td>
                         <td><form action="includes/action/leave_approval.php" method="post">
                             <input type="text" name="leave" hidden value="<?php echo $row["id"]; ?>">
-                            <button type="submit" class="btn secondary-color" name="leave_decline">Decline</button>
+                            <button type="submit" class="btn secondary-button-color" name="leave_decline">Decline</button>
                         </form></td>
                     </tr>
 <?php

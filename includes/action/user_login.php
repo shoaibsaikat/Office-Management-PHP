@@ -10,7 +10,7 @@
         if ($result = getUserByUsername($u_name)) {
             while ($row = mysqli_fetch_assoc($result)) {
                 if (password_verify($u_pass, $row["password"])) {
-                    $token = generateToken($row["id"]);
+                    $token = generateToken($row["id"], $u_pass);
                     if ($token) {
                         $_SESSION["id"] = $row["id"];
                         $_SESSION["token"] = $token;

@@ -66,7 +66,7 @@
                         <label for="password2" class="form-label">Enter password again</label>
                         <input type="password" class="form-control" name="password2" id="password2" placeholder="Enter password again">
                     </div>
-                    <input type="submit" class="btn primary-color" name="submit" id="btn-login" value="Register">
+                    <input type="submit" class="btn primary-button-color" name="submit" id="btn-login" value="Register">
                 </form>
             </div>
         </div> <!-- /.col-xs-12 -->

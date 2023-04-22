@@ -3,9 +3,47 @@
 }
 
 .secondary-color {
-    background-color: #f7e3e7;
+    background-color: #fde2e8;
+}
+
+.primary-button-color {
+    background-color: #b8e0fd;
+}
+
+.secondary-button-color {
+    background-color: #fac3ce;
 }
 
 .body-height {
     height: 400px;
+}
+
+/* pagination color scheme */
+.pagination > li > a
+{
+    background-color: white;
+    color: rgb(31, 31, 31);
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: rgb(31, 31, 31);
+    background-color: #eee;
+    border-color: #ddd;
+}
+
+.pagination > .active > a
+{
+    color: rgb(31, 31, 31);
+    background-color: #b8e0fd;
+    border: solid 1px #b8e0fd;
+}
+
+.pagination > .active > a:hover
+{
+    background-color: #b8e0fd;
+    border: solid 1px #b8e0fd;
 }
