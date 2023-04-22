@@ -3,7 +3,13 @@
 <?php
     $msg = "";
     if (isset($_POST["submit"])) {
-        if ($_POST["username"] != "" && $_POST["email"] != "" && $_POST["password"] != "" && $_POST["password2"] != "" && $_POST["firstname"] != "") {
+        if ($_POST["username"] != "" &&
+            $_POST["email"] != "" &&
+            $_POST["password"] != "" &&
+            $_POST["password2"] != "" &&
+            $_POST["firstname"] != "" &&
+            $_POST["lastname"] != "") {
+
             $u_pass = mysqli_real_escape_string($connection, $_POST["password"]);
             $u_pass2 = mysqli_real_escape_string($connection, $_POST["password2"]);
             if (strcmp($u_pass,$u_pass2) != 0) {
@@ -27,10 +33,9 @@
     }
 ?>
 
-
 <div class="container">
     <div class="row">
-        <div class="col-md-6 col-md-offset-3 body-height">
+        <div class="col-md-6 col-md-offset-3">
             <div class="form-wrap">
             <h1>Register</h1>
                 <!-- Error message -->
@@ -59,7 +64,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="password2" class="form-label">Enter password again</label>
-                        <input type="password2" class="form-control" name="password2" id="password2" placeholder="Enter password again">
+                        <input type="password" class="form-control" name="password2" id="password2" placeholder="Enter password again">
                     </div>
                     <input type="submit" class="btn primary-color" name="submit" id="btn-login" value="Register">
                 </form>
