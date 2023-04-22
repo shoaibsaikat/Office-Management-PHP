@@ -21,7 +21,7 @@
       </ul>
 <?php if (isset($_SESSION["id"])) { ?>
       <form class="d-flex" action="includes/action/user_logout.php" method="post">
-        <button class="btn btn-outline-secondary text-light text-bg-secondary" type="submit" name="logout">Logout</button>
+        <button class="btn secondary-color" type="submit" name="logout">Logout</button>
       </form>
 <?php } ?>
     </div>

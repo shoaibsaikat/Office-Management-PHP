@@ -18,7 +18,8 @@
             <button type="submit" class="btn primary-color" name="apply_leave">Apply</button>
         </form>
     </div>
-    <?php } ?>
-    <hr>
-<?php } ?>
+<?php
+        }
+    }
+?>
 </div>
