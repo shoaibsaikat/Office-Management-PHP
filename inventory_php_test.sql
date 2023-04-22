@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2023 at 04:44 AM
+-- Generation Time: Apr 22, 2023 at 10:10 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -44,7 +44,9 @@ CREATE TABLE `leave` (
 --
 
 INSERT INTO `leave` (`id`, `creation_date`, `approved`, `approve_date`, `start_date`, `day_count`, `comment`, `approver_id`, `user_id`) VALUES
-(17, '2023-04-22 00:00:00.000000', NULL, NULL, '2023-04-25 00:00:00.000000', 2, 'Personal reason', 9, 11);
+(19, '2023-04-22 00:00:00.000000', 0, NULL, '2023-04-26 00:00:00.000000', 1, 'Personal reason', 11, 8),
+(20, '2023-04-22 00:00:00.000000', 1, '0000-00-00 00:00:00.000000', '2023-06-13 00:00:00.000000', 2, 'Family trip', 11, 8),
+(21, '2023-04-22 00:00:00.000000', NULL, NULL, '2023-08-24 00:00:00.000000', 1, 'Birthday', 11, 8);
 
 -- --------------------------------------------------------
 
@@ -65,20 +67,17 @@ CREATE TABLE `user` (
   `is_active` tinyint(1) NOT NULL,
   `date_joined` datetime(6) NOT NULL,
   `supervisor_id` int(11) DEFAULT NULL,
-  `can_approve_inventory` tinyint(1) NOT NULL,
-  `can_distribute_inventory` tinyint(1) NOT NULL,
-  `can_approve_leave` tinyint(1) NOT NULL,
-  `can_manage_asset` tinyint(1) NOT NULL
+  `can_approve_leave` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `password`, `token`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_active`, `date_joined`, `supervisor_id`, `can_approve_inventory`, `can_distribute_inventory`, `can_approve_leave`, `can_manage_asset`) VALUES
-(8, '$2y$12$fxJM6zhxYfXO8sjKKxdVu.bYduNRydSXjfIaAgxtCzdbSzv8y.AJW', NULL, NULL, 0, 'shoaib.rahman', 'Shoaib', 'Mina', 'shoaib.rahman@beza.gov.bd', 0, '0000-00-00 00:00:00.000000', 11, 0, 0, 0, 0),
-(9, '$2y$12$L4DwZ6wcSMDR1rqKMqtLfeA80jz9tKpAhA2JaX/viBFrJ5k2JdJ2a', NULL, NULL, 0, 'distributor', 'Distributor', '', 'distributor@someone.com', 0, '0000-00-00 00:00:00.000000', NULL, 0, 0, 0, 0),
-(11, '$2y$12$qdz.2fjbXwDbCM5k9Cvd/Onv33M0ZQNSn8S7GKmVzd3BJmY0CdNw2', '$2y$12$EO/22GHuHQFfRx2GOYtkFOPn9Xz4uBgzeFEsO30Q0rTPap8kfhuty', NULL, 0, 'approver', 'Approver', '', 'approver@someone.com', 0, '0000-00-00 00:00:00.000000', 8, 0, 0, 0, 0);
+INSERT INTO `user` (`id`, `password`, `token`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_active`, `date_joined`, `supervisor_id`, `can_approve_leave`) VALUES
+(8, '$2y$12$fxJM6zhxYfXO8sjKKxdVu.bYduNRydSXjfIaAgxtCzdbSzv8y.AJW', NULL, '2023-04-22 00:00:00.000000', 0, 'shoaib.rahman', 'Shoaib', 'Mina', 'shoaib.rahman@beza.gov.bd', 1, '0000-00-00 00:00:00.000000', 11, 0),
+(11, '$2y$12$qdz.2fjbXwDbCM5k9Cvd/Onv33M0ZQNSn8S7GKmVzd3BJmY0CdNw2', '$2y$12$iCOxrcVGqnTj52sSRPZ/W.FN7/KZeyKylubytByY8CLPxUFOwUHzm', '2023-04-22 00:00:00.000000', 0, 'approver', 'Approver', '', 'approver@someone.com', 1, '0000-00-00 00:00:00.000000', NULL, 1),
+(12, '$2y$12$P2blsCH4EjV94el5C.NaW.FEREAt7RCBlWVMiaTfvsABnhWqW6t1u', NULL, '2023-04-22 00:00:00.000000', 0, 'distributor', 'Distributor', 'Officer', 'abc@abc.com', 1, '2023-04-22 00:00:00.000000', NULL, 0);
 
 --
 -- Indexes for dumped tables
@@ -108,13 +107,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `leave`
 --
 ALTER TABLE `leave`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
