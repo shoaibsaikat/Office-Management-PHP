@@ -3,14 +3,14 @@
 <div class="row">
     <!-- Home Column -->
     <div class="col-md-8">
-    <h1 class="page-header">
+    <h2 class="page-header">
         Welcome 
 <?php
         if (isset($_SESSION["firstname"])) {
             echo $_SESSION["firstname"]." ".$_SESSION["lastname"];
         }
 ?>
-    </h1>
+    </h2>
     <table>
         <tbody>
             <tr>

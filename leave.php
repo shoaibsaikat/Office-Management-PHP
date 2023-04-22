@@ -3,7 +3,7 @@
 <div class="row">
     <!-- Own Leave Column -->
     <div class="col-md-8">
-        <h1 class="page-header">Your leave this year</h1>
+        <h2>Your leave in <?php echo date("Y"); ?></h2>
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -51,11 +51,14 @@ if ($result = getAllLeaveByUserInCurrentYear($_SESSION["id"])) {
     </div>
     <!-- Sidebar Widgets Column -->
     <?php include "includes/ui/leave_sidebar.php"; ?>
+    <div class="col-md-12"><br></div>
+    <div class="col-md-12"><br></div>
     <!-- Leave Approval Column -->
 <?php if (isset($_SESSION["can_approve_leave"]) && $_SESSION["can_approve_leave"]) { ?>
     <hr>
-    <div class="col-md-8">
-        <h1 class="page-header">Leave Approval</h1>
+    <div class="col-md-12"><br></div>
+    <div class="col-md-12">
+        <h2>Leave Approval for <?php echo date("Y"); ?></h2>
         <div class="table-responsive">
             <table class="table">
                 <thead>
