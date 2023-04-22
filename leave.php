@@ -25,7 +25,17 @@ if ($result = getAllLeaveByUserInCurrentYear($_SESSION["id"])) {
                     <tr>
                         <th scope="row"><?php echo ++$count; ?></th>
                         <td><?php echo getPrintableDate($row["start_date"]); ?></td>
-                        <td><?php echo $row["approved"] == null ? "Waiting for approval" : "Approved"; ?></td>
+                        <td>
+<?php
+    if ($row["approved"] == null) {
+        echo "Waiting for approval";
+    } else if ($row["approved"] == 0) {
+        echo "Not approved";
+    } else {
+        echo "Approved";
+    }
+?>
+                        </td>
                         <td><?php echo $row["day_count"]; ?></td>
                     </tr>
 <?php } ?>
