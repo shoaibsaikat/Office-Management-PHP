@@ -1,5 +1,5 @@
 # Office-Management-PHP
-This Office management app is different from the others and made totally in a new design. Made only usinng raw PHP in mind, no UI framework will be added to this app except jQuery.
+This Office management app is different from the others and made totally in a new design. Made only using raw PHP in mind, no UI framework will be added to this app except jQuery.
 
 Features:
 1. User profile
