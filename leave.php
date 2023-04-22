@@ -81,9 +81,9 @@ if ($result = getAllLeaveByUserInCurrentYear($_SESSION["id"], $currentPageMyLeav
                 }
                 for (; $i <= $maxViewPageMyLeave; $i++) {
                     if ($currentPageMyLeave == $i) {
-                        echo "<li class='page-item active'><a class='page-link' href='leave.php?ml={$i}&la={$$currentPageLeaveApproval}'>{$i}</a></li>";
+                        echo "<li class='page-item active'><a class='page-link' href='leave.php?ml={$i}&la={$currentPageLeaveApproval}'>{$i}</a></li>";
                     } else {
-                        echo "<li class='page-item'><a class='page-link' href='leave.php?ml={$i}&la={$$currentPageLeaveApproval}'>{$i}</a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='leave.php?ml={$i}&la={$currentPageLeaveApproval}'>{$i}</a></li>";
                     }
                 }
 ?>
