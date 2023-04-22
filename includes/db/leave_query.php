@@ -31,12 +31,15 @@ function getAllLeaveCountByUserInCurrentYear($id) {
 }
 
 // if approved is NULL then it's pending, if it's 0 then it's disapproved
-function getAllPendingLeaveByApproverInCurrentYear($id) {
+function getAllPendingLeaveByApproverInCurrentYear($id, $page) {
     global $connection;
+    $offset = ($page - 1) * ENV_PAGE_LIMIT;
+    $limit = ENV_PAGE_LIMIT;
     $query = "SELECT leave.id, leave.start_date, leave.day_count, leave.comment, user.first_name, user.last_name ";
     $query .= "FROM `leave` INNER JOIN `user` ON user.id = leave.user_id ";
     $query .= "WHERE approver_id = {$id} AND approved IS NULL AND YEAR(start_date) = YEAR(CURDATE()) ";
-    $query .= "ORDER BY start_date";
+    $query .= "ORDER BY start_date ";
+    $query .= "LIMIT {$limit} OFFSET {$offset}";
     if ($result = mysqli_query($connection, $query))
         return $result;
     return null;

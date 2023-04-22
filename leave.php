@@ -81,9 +81,9 @@ if ($result = getAllLeaveByUserInCurrentYear($_SESSION["id"], $currentPageMyLeav
                 }
                 for (; $i <= $maxViewPageMyLeave; $i++) {
                     if ($currentPageMyLeave == $i) {
-                        echo "<li class='page-item active'><a class='page-link' href='leave.php?ml={$i}'>{$i}</a></li>";
+                        echo "<li class='page-item active'><a class='page-link' href='leave.php?ml={$i}&la={$$currentPageLeaveApproval}'>{$i}</a></li>";
                     } else {
-                        echo "<li class='page-item'><a class='page-link' href='leave.php?ml={$i}'>{$i}</a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='leave.php?ml={$i}&la={$$currentPageLeaveApproval}'>{$i}</a></li>";
                     }
                 }
 ?>
@@ -115,7 +115,7 @@ if ($result = getAllLeaveByUserInCurrentYear($_SESSION["id"], $currentPageMyLeav
                 </thead>
                 <tbody>
 <?php
-if ($result = getAllPendingLeaveByApproverInCurrentYear($_SESSION["id"])) {
+if ($result = getAllPendingLeaveByApproverInCurrentYear($_SESSION["id"], $currentPageLeaveApproval)) {
     $count = 0;
     while ($row = mysqli_fetch_assoc($result)) {
 ?>
@@ -141,6 +141,26 @@ if ($result = getAllPendingLeaveByApproverInCurrentYear($_SESSION["id"])) {
                 </tbody>
             </table>
         </div>
+        <nav>
+            <ul class="pagination">
+<?php
+                // only three or less page number will be shown
+                $maxViewPageLeaveApproval = $totalPageLeaveApproval > $currentPageLeaveApproval + 1 ? $currentPageLeaveApproval + 1 : $totalPageLeaveApproval;
+                if ($currentPageLeaveApproval > 1) {
+                    $i = $currentPageLeaveApproval - 1;
+                } else {
+                    $i = $currentPageLeaveApproval;
+                }
+                for (; $i <= $maxViewPageLeaveApproval; $i++) {
+                    if ($currentPageLeaveApproval == $i) {
+                        echo "<li class='page-item active'><a class='page-link' href='leave.php?ml={$currentPageMyLeave}&la={$i}'>{$i}</a></li>";
+                    } else {
+                        echo "<li class='page-item'><a class='page-link' href='leave.php?ml={$currentPageMyLeave}&la={$i}'>{$i}</a></li>";
+                    }
+                }
+?>
+            </ul>
+        </nav>
     </div>
 <?php } ?>
 </div>
