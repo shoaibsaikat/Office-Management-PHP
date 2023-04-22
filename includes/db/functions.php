@@ -16,4 +16,9 @@ function debug_log($log_msg) {
     // if you don't add `FILE_APPEND`, the file will be erased each time you add a log
     file_put_contents($log_file_data, $log_msg . "\n", FILE_APPEND);
 } 
+
+function getPrintableDate($input) {
+    $date = strtotime($input);
+    return date('d/M/Y', $date);
+}
 ?>

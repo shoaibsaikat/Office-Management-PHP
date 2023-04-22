@@ -11,12 +11,12 @@ function createLeave($user, $approver, $start, $days, $reason) {
 }
 
 // read
-function getAllLeaveByYear($id) {
+function getAllLeaveByUserInCurrentYear($id) {
     global $connection;
-    $query = "SELECT * FROM `leave` WHERE id = {$id} AND YEAR(start_date) = YEAR(CURDATE())";
-    if (mysqli_query($connection, $query))
-        return false;
-    return true;
+    $query = "SELECT * FROM `leave` WHERE user_id = {$id} ORDER BY start_date DESC";
+    if ($result = mysqli_query($connection, $query))
+        return $result;
+    return null;
 }
 
 // update

@@ -9,6 +9,6 @@
         $reason = mysqli_real_escape_string($connection, $_POST["reason"]);
         createLeave($_SESSION["id"], $_SESSION["manager"], $date, $days, $reason);
 
-        header("Location: ../../index.php");
+        header("Location: ../../leave.php");
     }
 ?>
