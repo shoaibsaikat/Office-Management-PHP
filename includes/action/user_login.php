@@ -22,6 +22,14 @@
                         $_SESSION["is_active"] = $row["is_active"];
                         $_SESSION["is_superuser"] = $row["is_superuser"];
                         $_SESSION["can_approve_leave"] = $row["can_approve_leave"];
+
+                        // get manager name
+                        if ($result = getUserById($_SESSION["manager"])) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $_SESSION["manager_name"] = $row["first_name"]." ".$row["last_name"];
+                                break;
+                            }
+                        }
                     }
                     break;
                 }

@@ -1,8 +1,43 @@
+<?php
+$msg = "";
+
+if (isset($_POST["set_password"])) {
+    $u_pass = mysqli_real_escape_string($connection, $_POST["password"]);
+    $u_pass2 = mysqli_real_escape_string($connection, $_POST["password2"]);
+    $u_pass3 = mysqli_real_escape_string($connection, $_POST["password3"]);
+
+    if (strcmp($u_pass2, $u_pass3) == 0) {
+        if ($result = getUserById($_SESSION["id"])) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                if (password_verify($u_pass, $row["password"])) {
+                    $u_pass2 = password_hash($u_pass2, PASSWORD_BCRYPT, ["cost" => 12]);
+                    $_SESSION["token"] = updatePassword($_SESSION["id"], $_SESSION["token"], $u_pass2);
+                    header("Location: index.php");
+                } else {
+                    $msg = "Wrong current passowrd!";
+                }
+                break;
+            }
+        }
+    } else {
+        $msg = "Passowrds do not match!";
+    }
+} else if (isset($_POST["set_manager"])) {
+    if (isset($_SESSION["id"]) && isset($_POST["supervisor"])) {
+        $supervisor = mysqli_real_escape_string($connection, $_POST["supervisor"]);
+        if (setSupervisor($_SESSION["id"], $supervisor)) {
+            $_SESSION["manager"] = $supervisor;
+        }
+    }
+    header("Location: index.php");
+}
+?>
+
 <div class="col-md-4">
 <?php if (isset($_SESSION["id"])) {  ?>
     <div>
         <h4>My Manager</h4>
-        <form action="includes/action/user_manager.php" method="post">
+        <form action="profile.php" method="post">
             <select class="form-select mb-3" aria-label=".form-select" name="supervisor">
                 <option selected disabled hidden>Select manager</option>
 <?php
@@ -25,7 +60,10 @@
     <hr>
     <div>
         <h4>My Password</h4>
-        <form action="includes/action/user_password.php" method="post">
+        <!-- Error message -->
+        <div class="text-danger"><?php echo $msg; ?></div><br>
+
+        <form action="profile.php" method="post">
             <div class="mb-3">
                 <input type="password" class="form-control" name="password" id="password" placeholder="Current password">
             </div>

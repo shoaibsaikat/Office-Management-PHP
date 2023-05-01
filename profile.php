@@ -21,7 +21,12 @@
                 <td><strong>Email:&emsp;</td>
                 <td><?php echo $_SESSION["email"]; ?></td>
             </tr>
-
+<?php if (isset($_SESSION["manager_name"])) { ?>
+            <tr>
+                <td><strong>Manager:&emsp;</td>
+                <td><?php echo $_SESSION["manager_name"]; ?></td>
+            </tr>
+<?php } ?>
         </tbody>
     </table>
     </div>

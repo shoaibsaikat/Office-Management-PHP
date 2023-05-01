@@ -92,15 +92,15 @@ function login($id) {
     return true;
 }
 
-function updatePassword($id, $token, $old_passowrd, $new_password) {
+function updatePassword($id, $token, $password) {
     global $connection;
     $query = "UPDATE user SET ";
-    $query .= "password = '{$new_password}' ";
-    $query .= "WHERE id = {$id} AND token = '{$token}' AND password = '{$old_passowrd}'";
+    $query .= "password = '{$password}' ";
+    $query .= "WHERE id = {$id} AND token = '{$token}'";
     if (!mysqli_query($connection, $query)) {
         die("UPDATE ERROR " . mysqli_error($connection));
     }
-    return generateToken($id, $new_password);
+    return generateToken($id, $password);
 }
 
 function generateToken($id, $password) {
